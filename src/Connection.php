@@ -1,24 +1,12 @@
 <?php
 namespace obray\ConnectionManager;
 
-class Connection
+class Connection extends \PDO
 {
-    private $available = false;
-    private $connection = null;
+    private $usage = 0;
 
-    public function __construct(string $host, string $user, string $pass, $dbname)
+    public function incrementUsage()
     {
-        $connection = new PDO("mysql:host=$host;dbname=$dbName", $user, $pass);
-    }
-
-    public function use()
-    {
-        $this->avaliable = false;
-        return $connection;
-    }
-
-    public function release()
-    {
-        $this->available = true;
+        ++$this->usage;
     }
 }
